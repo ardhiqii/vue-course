@@ -1,4 +1,6 @@
+import cartActions from "./actions"
 import cartGetters from "./getters"
+import cartMutations from "./mutations"
 
 const cartModule ={
   namespaced: true,
@@ -9,7 +11,9 @@ const cartModule ={
       qty: 0,
     }
   },
-  getters: cartGetters
+  getters: cartGetters,
+  mutations: cartMutations,
+  actions: cartActions
 }
 
 export default cartModule

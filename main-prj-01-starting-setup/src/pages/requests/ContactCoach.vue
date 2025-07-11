@@ -43,6 +43,7 @@ export default {
         email: this.email,
         message: this.message
       }
+      
       this.$store.dispatch('requests/contactCoach', formData)
 
       this.$router.replace('/coaches')

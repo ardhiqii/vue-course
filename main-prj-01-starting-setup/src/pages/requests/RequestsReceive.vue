@@ -1,24 +1,26 @@
 <template>
-  <base-dialog :show="!!error" title="An error occured!" @close="handleError">
-    <p>{{ error }}</p>
-  </base-dialog>
-  <section>
-    <base-card>
-      <header>
-        <h2>Request Received</h2>
-      </header>
-      <base-spinner v-if="isLoading"></base-spinner>
-      <ul v-else-if="hasRequests && !isLoading">
-        <request-item
-          v-for="req in receivedRequests"
-          :key="req.id"
-          :email="req.userEmail"
-          :message="req.message"
-        ></request-item>
-      </ul>
-      <h3 v-else>You haven't received any requests yet!</h3>
-    </base-card>
-  </section>
+  <div class="">
+    <base-dialog :show="!!error" title="An error occured!" @close="handleError">
+      <p>{{ error }}</p>
+    </base-dialog>
+    <section>
+      <base-card>
+        <header>
+          <h2>Request Received</h2>
+        </header>
+        <base-spinner v-if="isLoading"></base-spinner>
+        <ul v-else-if="hasRequests && !isLoading">
+          <request-item
+            v-for="req in receivedRequests"
+            :key="req.id"
+            :email="req.userEmail"
+            :message="req.message"
+          ></request-item>
+        </ul>
+        <h3 v-else>You haven't received any requests yet!</h3>
+      </base-card>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -28,14 +30,14 @@ export default {
   components: {
     RequestItem,
   },
-  data(){
-    return{
+  data() {
+    return {
       isLoading: true,
-      error: null
-    }
+      error: null,
+    };
   },
-  created(){
-    this.loadRequests()
+  created() {
+    this.loadRequests();
   },
   computed: {
     receivedRequests() {
@@ -45,21 +47,20 @@ export default {
       return this.$store.getters['requests/hasRequests'];
     },
   },
-  methods:{
-    async loadRequests(){
-      this.isLoading = true
+  methods: {
+    async loadRequests() {
+      this.isLoading = true;
       try {
-        await this.$store.dispatch('requests/fetchRequests')
-        
+        await this.$store.dispatch('requests/fetchRequests');
       } catch (error) {
-        this.error = error.message || 'Something failed!'        
+        this.error = error.message || 'Something failed!';
       }
-      this.isLoading = false
-    }
+      this.isLoading = false;
+    },
   },
-  handleError(){
-    this.error = null
-  }
+  handleError() {
+    this.error = null;
+  },
 };
 </script>
 

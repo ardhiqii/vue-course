@@ -59,6 +59,14 @@ export default {
         return;
       }
 
+      if(this.mode === 'login'){
+        // lmao
+      }else{
+        this.$store.dispatch('signup',{
+          email: this.email,
+          password: this.password
+        })
+      }
       // send http request
     },
     switchAuthMode() {
